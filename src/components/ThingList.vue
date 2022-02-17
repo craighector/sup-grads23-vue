@@ -1,6 +1,6 @@
 <template>
     <div class="thing-list">
-        <button>Refresh</button>
+        <button @click="fetchList">Refresh</button>
         <div v-if="hasThings">
             <div 
                 v-for="(thing, index) in things" 
@@ -32,31 +32,20 @@
 
 <script>
 import ThingDetail from './ThingDetail.vue'
+import { getThings } from '../api/'
+
 export default {
 	components: { ThingDetail },
     name: "ThingList",
     data() {
         return {
-            things: [
-                {
-                    "id": "1001",
-                    "name": "Orange Bottle",
-                    "keywords": [
-                    "equipment",
-                        "food"
-                    ]
-                },
-                {
-                    "id": "1002",
-                    "name": "Ashley's Vaporiser",
-                    "keywords": [
-                        "equipment"
-                    ]
-                }
-            ],
+            things: [],
             flagged: [],
             selectedId: null
         }
+    },
+    mounted() {
+        this.fetchList()
     },
     computed: {
         hasThings() {
@@ -83,6 +72,9 @@ export default {
         },
         isSelected(id) {
             return this.selectedId === id
+        },
+        async fetchList() {
+            this.things = await getThings()
         }
     }
 }
