@@ -7,16 +7,20 @@
                 :key="index"
                 class="thing-list-item"
                 :class="{'item-flagged' : isFlagged(thing.id)}"
+                @click="selectThing(thing.id)"
             >
                 <p>{{ thing.name }}</p>
                 <div>
                     <!-- can use v-on:click or @click -->
-                    <button @click="removeThing(index)">Remove</button>
-                    <button @click="flagThing(thing.id)">
+                    <!-- .stop modifier to stop event bubbling -->
+                    <button @click.stop="removeThing(index)">Remove</button>
+                    <button @click.stop="flagThing(thing.id)">
                         {{ isFlagged(thing.id) ? 'Unflag' : 'Flag' }}
                     </button>
-                    <!-- can use v-bind:thing="thing" -->
-                    <thing-detail :thing="thing"></thing-detail>
+                    <thing-detail 
+                        v-if="isSelected(thing.id)"
+                        :thing="thing
+                    "></thing-detail>
                 </div>
             </div>
         </div>
@@ -50,7 +54,8 @@ export default {
                     ]
                 }
             ],
-            flagged: []
+            flagged: [],
+            selectedId: null
         }
     },
     computed: {
@@ -72,6 +77,12 @@ export default {
         },
         isFlagged(id) {
             return this.flagged.includes(id)
+        },
+        selectThing(id) {
+            this.selectedId = this.isSelected(id) ? null : id
+        },
+        isSelected(id) {
+            return this.selectedId === id
         }
     }
 }
