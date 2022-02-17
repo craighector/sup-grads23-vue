@@ -9,7 +9,8 @@
             >
                 <p>{{ thing.name }}</p>
                 <div>
-                    <button>Remove</button>
+                    <!-- can use v-on:click or @click -->
+                    <button @click="removeThing(index)">Remove</button>
                     <button>Flag</button>
                 </div>
             </div>
@@ -46,7 +47,13 @@ export default {
     },
     computed: {
         hasThings() {
-            return this.things.length
+            return this.things.length > 0
+        }
+    },
+    methods: {
+        removeThing(index) {
+            // mutates the state and removes the thing
+            this.things.splice(index, 1)
         }
     }
 }
