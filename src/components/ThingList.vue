@@ -1,12 +1,20 @@
 <template>
-    <div>
+    <div class="thing-list">
         <button>Refresh</button>
-        <div>
-            <p>A thing</p>
-            <button>Remove</button>
-            <button>Flag</button>
+        <div v-if="hasThings">
+            <div 
+                v-for="(thing, index) in things" 
+                :key="index"
+                class="thing-list-item"
+            >
+                <p>{{ thing.name }}</p>
+                <div>
+                    <button>Remove</button>
+                    <button>Flag</button>
+                </div>
+            </div>
         </div>
-        <div>
+        <div v-else class="thing-list-item">
             <p>There are no things.</p>
         </div>
     </div>
@@ -17,12 +25,67 @@ export default {
     name: "ThingList",
     data() {
         return {
-            things: []
+            things: [
+                {
+                    "id": "1001",
+                    "name": "Orange Bottle",
+                    "keywords": [
+                    "equipment",
+                        "food"
+                    ]
+                },
+                {
+                    "id": "1002",
+                    "name": "Ashley's Vaporiser",
+                    "keywords": [
+                        "equipment"
+                    ]
+                }
+            ]
+        }
+    },
+    computed: {
+        hasThings() {
+            return this.things.length
         }
     }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+    .thing-list {
+        button {
+            min-width: 96px;
+            border-radius: 0px;
+            border: 1px solid darkgray;
+            outline: none;
 
+            &:hover {
+                background-color: white;
+            }
+        }
+
+        display: flex;
+        flex-direction: column;
+        max-width: 512px;
+        border: 1px solid black;
+
+        .thing-list-item {
+            display: flex;
+            flex-direction: column;
+            padding: 8px;
+            border-bottom: 1px solid darkgrey;
+
+            &:hover {
+                background:lightgrey;
+            }
+        }
+        .item-flagged {
+            background-color: lightpink;
+
+            &:hover {
+                background:lightcoral;
+            }
+        }
+    }
 </style>
