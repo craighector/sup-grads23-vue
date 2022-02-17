@@ -15,6 +15,8 @@
                     <button @click="flagThing(thing.id)">
                         {{ isFlagged(thing.id) ? 'Unflag' : 'Flag' }}
                     </button>
+                    <!-- can use v-bind:thing="thing" -->
+                    <thing-detail :thing="thing"></thing-detail>
                 </div>
             </div>
         </div>
@@ -25,7 +27,9 @@
 </template>
 
 <script>
+import ThingDetail from './ThingDetail.vue'
 export default {
+	components: { ThingDetail },
     name: "ThingList",
     data() {
         return {
