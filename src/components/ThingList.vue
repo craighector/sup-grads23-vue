@@ -6,12 +6,15 @@
                 v-for="(thing, index) in things" 
                 :key="index"
                 class="thing-list-item"
+                :class="{'item-flagged' : isFlagged(thing.id)}"
             >
                 <p>{{ thing.name }}</p>
                 <div>
                     <!-- can use v-on:click or @click -->
                     <button @click="removeThing(index)">Remove</button>
-                    <button>Flag</button>
+                    <button @click="flagThing(thing.id)">
+                        {{ isFlagged(thing.id) ? 'Unflag' : 'Flag' }}
+                    </button>
                 </div>
             </div>
         </div>
@@ -42,7 +45,8 @@ export default {
                         "equipment"
                     ]
                 }
-            ]
+            ],
+            flagged: []
         }
     },
     computed: {
@@ -54,6 +58,16 @@ export default {
         removeThing(index) {
             // mutates the state and removes the thing
             this.things.splice(index, 1)
+        },
+        flagThing(id) {
+            if (this.isFlagged(id)) {
+                this.flagged = this.flagged.filter( i => i !== id)
+            } else {
+                this.flagged.push(id)
+            }
+        },
+        isFlagged(id) {
+            return this.flagged.includes(id)
         }
     }
 }
