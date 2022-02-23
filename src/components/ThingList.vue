@@ -105,7 +105,7 @@ export default {
             border-bottom: 1px solid darkgrey;
 
             &:hover {
-                background:lightgrey;
+                background:rgb(35, 3, 216);
             }
         }
         .item-flagged {
