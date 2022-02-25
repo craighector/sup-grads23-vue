@@ -83,8 +83,12 @@ export default {
 <style lang="scss" scoped>
     .thing-list {
         button {
+            padding: 5px;
+            margin-left :5px;
+            margin-right :5px;
+            margin-top :5px;
             min-width: 96px;
-            border-radius: 0px;
+            border-radius: 5px;
             border: 1px solid darkgray;
             outline: none;
 
@@ -92,17 +96,21 @@ export default {
                 background-color: white;
             }
         }
-
-        display: flex;
-        flex-direction: column;
+        display: block;
+        margin-top :10px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
         max-width: 512px;
         border: 1px solid black;
+        
 
         .thing-list-item {
             display: flex;
             flex-direction: column;
-            padding: 8px;
+            padding: 35px;
             border-bottom: 1px solid darkgrey;
+            
 
             &:hover {
                 background:rgb(211, 211, 211);

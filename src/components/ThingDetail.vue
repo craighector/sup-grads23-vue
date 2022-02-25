@@ -32,14 +32,14 @@ export default {
     .thing-details {
         display: flex;
         flex-direction: column;
-        margin: 16px;
+        margin: 20px;
         background-color: white;
         border: 1px solid darkgray;
 
         .thing-details-keys {
             display: flex;
             flex-direction: row;
-            padding: 8px;
+            padding: 20px;
 
             .keyword {
                 border: 1px solid grey;
