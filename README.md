@@ -1,4 +1,4 @@
-# sup-grads22-vue
+# sup-grads23-vue
 
 ## Project setup
 ```
